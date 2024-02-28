@@ -152,18 +152,19 @@ int main(int argc, char* argv[]){
         printf("   Generated Key: %lx\n", k->subKeys[subKeyNum].key);
     }
 
-    unsigned long long fullCipher = ((unsigned long long)msg_right << 32) | msgLeft; // combine left and right half of message  
-    unsigned long long encryptedMsg = 0; //  variable to store the final message after applying the final permutation
+    unsigned long combined_c = ((unsigned long)msg_right << 32) | msgLeft; // combine left and right half of message  
+    unsigned long final_message = 0; //  variable to store the final message after applying the final permutation
 
     // the final permutation to the combined message
     for (int i = 0; i < 64; i++) {
-        encryptedMsg |= ((fullCipher >> (64 - final_p[i])) & 0x01) << (63 - i);
+        final_message |= ((combined_c >> (64 - final_p[i])) & 0x01) << (63 - i);
     }
 
     // convert and print message as ascii characters
+    printf("Decypted Message: 0x%lx\n", final_message);
     printf("Final Decrypted Message: ");
     for (int i = 0; i < 8; i++) {
-        printf("%c", (char)(encryptedMsg >> (56 - 8 * i))); // extract each byte and cast to char
+        printf("%c", (char)(final_message >> (56 - 8 * i))); // extract each byte and cast to char
     }
     printf("\n"); 
     return 0;
