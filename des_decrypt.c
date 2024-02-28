@@ -1,5 +1,5 @@
 /* Jacob Gutierrez, Computer Security HW 2 */
-/* DES Process as outlined in the assigned reading 5 */
+/* DES Process as outlined in the assigned reading 5, as well as ideas of students i heard talking about it in class */
 
 #include <stdio.h>
 #include <stdlib.h>
